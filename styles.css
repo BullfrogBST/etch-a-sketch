@@ -19,6 +19,8 @@ body{
 
 :root{
     --primary-color: #D22E0D;
+
+    --light-gray: #A4A4A4;
     --dark-gray: #121212;
 }
 
@@ -68,6 +70,8 @@ body{
 .grid-container{
     width: fit-content;
     height: fit-content;
+
+    background-color: var(--light-gray);
 
     border: 3px solid black;
 }
