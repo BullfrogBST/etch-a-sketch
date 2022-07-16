@@ -39,7 +39,7 @@ tilesInput.addEventListener('change', () =>{
 })
 
 //Make a new div with the class grid-tile for as many columns and rows as the input value suggests. Make them a child of the grid container
-
+    
 
 //For each grid-tile, check if it's been hovered over, and if so, call the mouseOverTile() function and pass the event target
 
