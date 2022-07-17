@@ -3,18 +3,19 @@ const gridContainer = document.querySelector('.grid-container');
 const tilesInput = document.querySelector('.tile-input');
 const messageContainer = document.querySelector('.message-container');
 
+let gridTiles = document.querySelectorAll('.grid-tile');
+
 const featureStats = {
-    tilesStartValue: 64,
-
+    tilesStartValue: 32,
+    
     errorMessage: document.createElement('p'),
-
+    
     validInput: true
 }
 
 tilesInput.value = featureStats.tilesStartValue;
 
 //If the tilesInput value is blank or over 100, give an error message. Do this with the checkValidInput function
-
 function checkValidInput(){
     return new Promise((resolve, reject) =>{
         if(tilesInput.value > 100){
@@ -33,7 +34,6 @@ tilesInput.addEventListener('change', () =>{
     checkValidInput()
         .then(() =>{
             featureStats.errorMessage.textContent = '';
-            console.log('Valid Input!');
             makeGrid();
         })
         .catch((err) =>{
@@ -43,23 +43,33 @@ tilesInput.addEventListener('change', () =>{
         })
 })
 //Make a new div with the class grid-tile for as many columns and rows as the input value suggests. Make them a child of the grid container. Put this in the makeGrid() function
-if(featureStats.validInput) makeGrid();
-
+if(featureStats.validInput) makeGrid()
 function makeGrid(){
-    gridContainer.innerHTML = ''
-    for(let i=0; i<tilesInput.value; i++){
+    return new Promise((resolve, reject) =>{
+        gridContainer.innerHTML = ''
         for(let i=0; i<tilesInput.value; i++){
-            const gridTile = document.createElement('div');
-            gridTile.classList.add('grid-tile');
-            gridContainer.appendChild(gridTile);
+            for(let i=0; i<tilesInput.value; i++){
+                const gridTile = document.createElement('div');
+                gridTile.classList.add('grid-tile');
+                gridContainer.appendChild(gridTile);
+            }
         }
-    }
-    console.log(tilesInput.value)
-    gridContainer.style.cssText = `display: grid; grid-template-columns: repeat(${tilesInput.value}, 1fr); grid-template-rows: repeat(tilesInput.value, 1fr);`
+        console.log(tilesInput.value)
+        gridContainer.style.cssText = `display: grid; grid-template-columns: repeat(${tilesInput.value}, 1fr); grid-template-rows: repeat(tilesInput.value, 1fr);`
+        gridTiles = document.querySelectorAll('.grid-tile');
+        console.log(gridTiles)
+        resolve();
+    })
 }
 
 //For each grid-tile, check if it's been hovered over, and if so, call the mouseOverTile() function and pass the event target
-
+gridContainer.addEventListener('mouseover', () =>{
+    gridTiles.forEach((gridTile) =>{
+        gridTile.addEventListener('mouseover', (e)=>{
+            e.target.style.cssText = 'background-color: black;';
+        })
+    })
+})
 //Declare the mouseOverTile() function
 
 //Create a temporary variable for the color of the current tile, which is a random rgb value
