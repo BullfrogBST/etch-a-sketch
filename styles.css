@@ -1,5 +1,5 @@
 html{
-    height: 100%;
+    height: 100vh;
 }
 
 body{
@@ -27,10 +27,10 @@ body{
 /*Main Content*/
 
 .sketch-content{
-    width: 90vw;
-    min-width: fit-content;
-    height: 90vh;
-    min-height: fit-content;
+    width: 90%;
+    min-height: 90%;
+    max-height: auto;
+    padding: 1rem;
 
     border: 3px solid black;
 
@@ -41,11 +41,7 @@ body{
     background-color: var(--primary-color);
 }
 
-.title-container{
-    margin-top: 3rem;
-}
-
-.div-line{
+ .div-line{
     background-color: var(--dark-gray);
 
     border: none;
@@ -99,10 +95,18 @@ body{
 /*Grid Area*/
 
 .grid-container{
-    width: fit-content;
-    height: fit-content;
-
+    width: 40%;
+    aspect-ratio: 1/1;
+    
     background-color: var(--light-gray);
 
     border: 3px solid black;
+}   
+
+.grid-tile{
+    width: 100%;
+    height: 100%;
+
+    box-sizing: border-box;
+    border: .01px solid black;
 }

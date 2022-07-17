@@ -5,7 +5,10 @@ const messageContainer = document.querySelector('.message-container');
 
 const featureStats = {
     tilesStartValue: 64,
-    errorMessage: document.createElement('p')
+
+    errorMessage: document.createElement('p'),
+
+    validInput: true
 }
 
 tilesInput.value = featureStats.tilesStartValue;
@@ -31,15 +34,29 @@ tilesInput.addEventListener('change', () =>{
         .then(() =>{
             featureStats.errorMessage.textContent = '';
             console.log('Valid Input!');
+            makeGrid();
         })
         .catch((err) =>{
             featureStats.errorMessage.textContent = err;
             messageContainer.appendChild(featureStats.errorMessage)
+            featureStats.validInput = false;
         })
 })
+//Make a new div with the class grid-tile for as many columns and rows as the input value suggests. Make them a child of the grid container. Put this in the makeGrid() function
+if(featureStats.validInput) makeGrid();
 
-//Make a new div with the class grid-tile for as many columns and rows as the input value suggests. Make them a child of the grid container
-    
+function makeGrid(){
+    gridContainer.innerHTML = ''
+    for(let i=0; i<tilesInput.value; i++){
+        for(let i=0; i<tilesInput.value; i++){
+            const gridTile = document.createElement('div');
+            gridTile.classList.add('grid-tile');
+            gridContainer.appendChild(gridTile);
+        }
+    }
+    console.log(tilesInput.value)
+    gridContainer.style.cssText = `display: grid; grid-template-columns: repeat(${tilesInput.value}, 1fr); grid-template-rows: repeat(tilesInput.value, 1fr);`
+}
 
 //For each grid-tile, check if it's been hovered over, and if so, call the mouseOverTile() function and pass the event target
 
