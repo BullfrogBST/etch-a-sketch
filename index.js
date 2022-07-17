@@ -52,6 +52,7 @@ function makeGrid(){
                 const gridTile = document.createElement('div');
                 gridTile.classList.add('grid-tile');
                 gridContainer.appendChild(gridTile);
+                gridTile.mouseOvers = 0;
             }
         }
         console.log(tilesInput.value)
@@ -65,16 +66,23 @@ function makeGrid(){
 //For each grid-tile, check if it's been hovered over, and if so, call the mouseOverTile() function and pass the event target
 gridContainer.addEventListener('mouseover', () =>{
     gridTiles.forEach((gridTile) =>{
-        gridTile.addEventListener('mouseover', (e)=>{
-            e.target.style.cssText = 'background-color: black;';
-        })
+        gridTile.addEventListener('mouseover', mouseOverTile)
     })
 })
 //Declare the mouseOverTile() function
+function mouseOverTile(e){
+    e.target.mouseOvers++
+    console.log(e.target.mouseOvers)
+    //Create a temporary variable for the color of the current tile, which is a random rgb value
+    let rand1 = Math.floor(Math.random() * 256) - e.target.mouseOvers * 25.5;
+    let rand2 = Math.floor(Math.random() * 256) - e.target.mouseOvers * 25.5;
+    let rand3 = Math.floor(Math.random() * 256) - e.target.mouseOvers * 25.5;
+    
 
-//Create a temporary variable for the color of the current tile, which is a random rgb value
-
-//Every time that specific tile is passed over, add 10% black to it
+    e.target.style.cssText += `background-color: rgb(${rand1}, ${rand2}, ${rand3})`
+    //Every time that specific tile is passed over, add 10% black to it
+    
+}
 
 //Add an event listener to the clear button, and call the clearGrid() function
 
