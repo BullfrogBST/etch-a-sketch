@@ -3,6 +3,8 @@ const gridContainer = document.querySelector('.grid-container');
 const tilesInput = document.querySelector('.tile-input');
 const messageContainer = document.querySelector('.message-container');
 
+const clearBtn = document.querySelector('.clear-btn');
+
 let gridTiles = document.querySelectorAll('.grid-tile');
 
 const featureStats = {
@@ -71,21 +73,24 @@ gridContainer.addEventListener('mouseover', () =>{
 })
 //Declare the mouseOverTile() function
 function mouseOverTile(e){
-    e.target.mouseOvers++
-    console.log(e.target.mouseOvers)
     //Create a temporary variable for the color of the current tile, which is a random rgb value
+    //Every time that specific tile is passed over, add 10% black to it
+    e.target.mouseOvers++
+
     let rand1 = Math.floor(Math.random() * 256) - e.target.mouseOvers * 25.5;
     let rand2 = Math.floor(Math.random() * 256) - e.target.mouseOvers * 25.5;
     let rand3 = Math.floor(Math.random() * 256) - e.target.mouseOvers * 25.5;
     
 
     e.target.style.cssText += `background-color: rgb(${rand1}, ${rand2}, ${rand3})`
-    //Every time that specific tile is passed over, add 10% black to it
-    
 }
 
 //Add an event listener to the clear button, and call the clearGrid() function
-
+clearBtn.addEventListener('click', clearGrid)
 //Declare the clearGrid() function
-
-//For every tile on the grid, set the color back to white
+function clearGrid(){
+    //For every tile on the grid, set the color back to the default color
+    gridTiles.forEach((gridTile) =>{
+        gridTile.style.cssText = '';
+    })
+}
